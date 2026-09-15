@@ -23,6 +23,27 @@ a objetos que seja fácil de manter e de estender com novos tipos de conta.
 | Exceções customizadas | `ValorInvalidoException`, `SaldoInsuficienteException`, `OperacaoNaoSuportadaException` |
 | Extensibilidade (Open/Closed) | Novos tipos de conta (ex.: `ContaInvestimento`) são adicionados sem alterar código existente |
 
+## Interface gráfica (Compose Desktop)
+
+Além da versão de console exigida pelo exercício, o projeto inclui uma interface
+gráfica real em Kotlin, usando **Compose Multiplatform for Desktop**, que consome
+exatamente as mesmas classes de domínio (`Banco`, `ContaBancaria` e subclasses) —
+nenhuma regra de negócio é duplicada entre console e UI.
+
+A tela mostra a lista de contas cadastradas, o saldo em destaque da conta
+selecionada, formulários de depósito/saque/transferência e o histórico de
+operações, tudo reagindo em tempo real às regras já implementadas (uma tentativa
+de saque acima do limite, por exemplo, aparece como erro vindo da própria
+`ContaBancaria`, não de uma validação duplicada na tela).
+
+```bash
+./gradlew run
+```
+
+> Em máquinas Linux com JDK **headless** (sem suporte gráfico), é preciso um JDK
+> completo (ex.: `sudo apt install openjdk-17-jdk`, ou um JDK como o Eclipse Temurin)
+> para que a janela consiga abrir.
+
 ## Estrutura do projeto
 
 ```
@@ -31,7 +52,8 @@ APLICATIVOBANCARIO/
 ├── settings.gradle.kts
 ├── src
 │   ├── main/kotlin/com/bytebank
-│   │   ├── Main.kt                     # ponto de entrada, cenário de demonstração
+│   │   ├── Main.kt                     # ponto de entrada da versão console
+│   │   ├── DemoData.kt                 # cenário de demonstração compartilhado (console + UI)
 │   │   ├── exception/BancoExceptions.kt
 │   │   ├── model/
 │   │   │   ├── ContaBancaria.kt        # classe abstrata base
@@ -42,7 +64,12 @@ APLICATIVOBANCARIO/
 │   │   │   ├── Comportamentos.kt       # interfaces TaxavelMensalmente / RendimentoMensal
 │   │   │   └── Transacao.kt            # histórico de operações
 │   │   ├── service/Banco.kt            # fachada que orquestra clientes e contas
-│   │   └── util/Formatador.kt          # formatação de moeda em pt-BR
+│   │   ├── util/Formatador.kt          # formatação de moeda em pt-BR
+│   │   └── ui/                         # interface gráfica (Compose Desktop)
+│   │       ├── MainUi.kt               # ponto de entrada da UI
+│   │       ├── BancoController.kt      # ponte entre a UI e o domínio bancário
+│   │       ├── Theme.kt                # paleta e tipografia
+│   │       └── App.kt                  # telas (sidebar, saldo, operações, histórico)
 │   └── test/kotlin/com/bytebank/ContaBancariaTest.kt
 └── gradle/ (wrapper)
 ```
@@ -70,10 +97,11 @@ e que **toda operação é registrada no histórico** da conta.
 
 ## Como executar
 
-Pré-requisito: JDK 17+.
+Pré-requisito: JDK 17+ **com suporte gráfico** (não headless).
 
 ```bash
-./gradlew run
+./gradlew run          # abre a interface gráfica (Compose Desktop)
+./gradlew runConsole    # executa a versão de console original do exercício
 ```
 
 ## Como rodar os testes
@@ -88,7 +116,7 @@ conta investimento e transferência entre contas.
 
 ## Saída esperada (resumo)
 
-Ao rodar `./gradlew run`, o programa:
+Ao rodar `./gradlew runConsole`, o programa:
 
 1. Cria 3 clientes e 3 tipos de conta diferentes;
 2. Realiza depósitos válidos e inválidos;
@@ -97,6 +125,9 @@ Ao rodar `./gradlew run`, o programa:
 5. Realiza uma transferência entre contas;
 6. Exibe o extrato geral do banco;
 7. Exibe o histórico de operações de cada conta.
+
+Ao rodar `./gradlew run`, as mesmas operações ficam disponíveis interativamente
+pela interface gráfica, com o mesmo cenário inicial de contas/clientes.
 
 ---
 
