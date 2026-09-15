@@ -79,6 +79,8 @@ APLICATIVOBANCARIO/
 - **Conta Corrente**: possui limite de cheque especial e cobra taxa mensal de manutenção.
 - **Conta Poupança**: sem taxas, rende um percentual mensal sobre o saldo.
 - **Conta Investimento**: rendimento maior que a poupança, porém com carência mínima para saque.
+- **Conta Salário**: sem taxas nem rendimento, mas libera apenas um saque gratuito
+  por mês (cota reiniciada a cada fechamento mensal).
 
 Todas herdam de `ContaBancaria`, que garante centralmente que **nenhuma conta
 comum fica com saldo negativo**, que **depósitos/saques inválidos são rejeitados**
@@ -133,8 +135,7 @@ pela interface gráfica, com o mesmo cenário inicial de contas/clientes.
 
 Atividade desenvolvida para a disciplina de Aplicativos Móveis — ADS/UNIPÊ.
 
-Integrantes 
-Pessoal, manda aqui o nome completo e matrícula para documentação:
+## Integrantes
 
 - Diego Leal Clemente (42182271)
 - José Davi Barbosa (45072825)
@@ -143,11 +144,11 @@ Pessoal, manda aqui o nome completo e matrícula para documentação:
 - Makson Douglas Barbosa da Silva (43708935)
 - Willian Gabriel Félix Farias (43750001)
 - Isacson Joabe Lima Cruz (43652310)
-- Luiz Carlos Souza Costa Cavadinha(42782759)
+- Luiz Carlos Souza Costa Cavadinha (42782759)
 - Luís Gustavo Rocha Gomes De Andrade (42917107)
 - Paula Thifanny Gomes Dias (43900119)
 - Henrique Santos da Silva (42386098)
-- ⁠Eduardo dos Santos Golzio (45660751)
-- ⁠Iago Edson Santos Lucena (49955276)
+- Eduardo dos Santos Golzio (45660751)
+- Iago Edson Santos Lucena (49955276)
 - Flavia Tavares do Nascimento (42031141)
 - Priscilla Santos Cahino (43432654)
