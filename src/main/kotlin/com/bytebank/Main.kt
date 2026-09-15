@@ -20,7 +20,7 @@ fun main() {
     val banco = DemoData.criarBancoDemonstracao()
     banco.exibirCabecalho("BANCO ${banco.nome.uppercase()}")
 
-    val (contaCorrente, contaPoupanca, contaInvestimento) = banco.contas
+    val (contaCorrente, contaPoupanca, contaInvestimento, contaSalario) = banco.contas
 
     println("\nContas criadas:")
     contaCorrente.exibirDados()
@@ -28,6 +28,8 @@ fun main() {
     contaPoupanca.exibirDados()
     println()
     contaInvestimento.exibirDados()
+    println()
+    contaSalario.exibirDados()
 
     // ---------------------------------------------------------------
     // 2. Depósitos (válidos e inválidos)
@@ -53,6 +55,12 @@ fun main() {
     operacao("Saque de ${Formatador.moeda(100.0)} na conta ${contaInvestimento.numero} (em carência)") {
         contaInvestimento.sacar(100.0)
     }
+    operacao("Saque de ${Formatador.moeda(300.0)} na conta ${contaSalario.numero} (1º saque gratuito do mês)") {
+        contaSalario.sacar(300.0)
+    }
+    operacao("Saque de ${Formatador.moeda(50.0)} na conta ${contaSalario.numero} (2º saque no mesmo mês)") {
+        contaSalario.sacar(50.0)
+    }
 
     // ---------------------------------------------------------------
     // 4. Fechamento mensal: taxas (conta corrente) e rendimentos (poupança/investimento)
@@ -63,10 +71,13 @@ fun main() {
     println("Novo saldo poupança (${contaPoupanca.numero}): ${Formatador.moeda(contaPoupanca.consultarSaldo())}")
     println("Novo saldo investimento (${contaInvestimento.numero}): ${Formatador.moeda(contaInvestimento.consultarSaldo())}")
 
-    // Segundo mês de rendimento, apenas para liberar a carência da conta investimento
+    // Segundo mês: libera a carência da conta investimento e reinicia a cota de saques da conta salário
     banco.processarFechamentoMensal()
     operacao("Saque de ${Formatador.moeda(100.0)} na conta ${contaInvestimento.numero} (após carência)") {
         contaInvestimento.sacar(100.0)
+    }
+    operacao("Saque de ${Formatador.moeda(50.0)} na conta ${contaSalario.numero} (novo mês, cota reiniciada)") {
+        contaSalario.sacar(50.0)
     }
 
     // ---------------------------------------------------------------

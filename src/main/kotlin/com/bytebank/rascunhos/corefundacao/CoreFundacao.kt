@@ -1,3 +1,8 @@
+// Rascunho enviado por Flavia Tavares Nascimento (commit "Add files via upload").
+// Mantido aqui apenas como referência histórica: é uma implementação paralela do
+// mesmo exercício, não utilizada pela solução oficial do projeto (ver com.bytebank.model/service).
+package com.bytebank.rascunhos.corefundacao
+
 // Classe que representa um cliente do banco
 class Cliente(
     val nome: String,

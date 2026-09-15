@@ -2,6 +2,7 @@ package com.bytebank.service
 
 import com.bytebank.model.Cliente
 import com.bytebank.model.ContaBancaria
+import com.bytebank.model.LimiteMensalReiniciavel
 import com.bytebank.model.RendimentoMensal
 import com.bytebank.model.TaxavelMensalmente
 
@@ -36,6 +37,7 @@ class Banco(val nome: String) {
             when (conta) {
                 is TaxavelMensalmente -> conta.aplicarTaxaMensal()
                 is RendimentoMensal -> conta.aplicarRendimento()
+                is LimiteMensalReiniciavel -> conta.reiniciarLimiteMensal()
                 else -> println("Conta ${conta.numero} não possui regra de fechamento mensal.")
             }
         }

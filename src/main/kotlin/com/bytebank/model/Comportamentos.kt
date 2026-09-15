@@ -11,3 +11,8 @@ interface RendimentoMensal {
     val percentualRendimento: Double
     fun aplicarRendimento()
 }
+
+/** Contas que reiniciam algum contador periódico a cada fechamento mensal (ex.: cota de saques gratuitos). */
+interface LimiteMensalReiniciavel {
+    fun reiniciarLimiteMensal()
+}

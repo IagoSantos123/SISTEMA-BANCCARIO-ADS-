@@ -1,3 +1,8 @@
+// Rascunho enviado por Flavia Tavares Nascimento (commit "Add files via upload").
+// Mantido aqui apenas como referência histórica: é uma implementação paralela do
+// mesmo exercício, não utilizada pela solução oficial do projeto (ver com.bytebank.model/service).
+package com.bytebank.rascunhos.bancov1
+
 import java.util.Locale
 
 class Cliente(
